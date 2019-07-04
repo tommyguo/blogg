@@ -1,0 +1,113 @@
+@media (max-width: 900px) {
+  #postHeader h1 {
+    font-size: 1.7em;
+  }
+
+  #postHeader h2 {
+    font-size: 1.3em;
+  }
+
+  #profPic {
+    width: 60px;
+  }
+
+  #authorTag {
+    padding: 17px 0 34px 0;
+    font-size: 0.9em;
+  }
+
+  #authorName {
+    padding: 20px 0 3px 0;
+  }
+}
+
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  #postHeader h1 {
+    font-size: 2.5em;
+  }
+
+  #postHeader h2 {
+    font-size: 1.5em;
+  }
+
+  #profPic {
+    width: 80px;
+  }
+
+  #authorTag {
+    padding: 24px 0 40px 0;
+    font-size: 1em;
+  }
+
+  #authorName {
+    padding: 29px 0 3px 0;
+  }
+} 
+
+@media (min-width: 1201px) {
+  #postHeader h1 {
+    font-size: 2.5em;
+  }
+
+  #postHeader h2 {
+    font-size: 1.5em;
+  }
+
+  #profPic {
+    width: 80px;
+  }
+
+  #authorTag {
+    padding: 24px 0 40px 0;
+    font-size: 1em;
+  }
+
+  #authorName {
+    padding: 29px 0 3px 0;
+  }
+}
+
+#postHeader {
+  font-family: 'Scope One', serif;
+  max-width: 740px;
+}
+
+#postHeader h1 {
+  color: #222222;
+  font-weight: 500;
+  line-height: 1.25em;
+  margin: 0 0 5px 0;
+}
+
+#postHeader h2 {
+  color: #aaaaaa;
+  font-weight: 500;
+  line-height: 1.25em;
+  margin: 0 0 8px 0;
+}
+
+#postHeader #authorTag {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  line-height: 0;
+}
+
+#postHeader #authorName {
+  color: #333333;
+  margin: 0;
+}
+
+#postHeader #publishedDate {
+  color: #aaaaaa;
+}
+
+#postHeader #profPic {
+  height: auto;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+#postHeader .postBanner {
+  margin-bottom: 30px;
+}

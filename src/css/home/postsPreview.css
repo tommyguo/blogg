@@ -1,0 +1,74 @@
+@media (max-width: 900px) {
+  #postsPreview {
+    margin: 1em 0 0 0;
+    width: 100%;
+  }
+
+  .postPreview .previewImage {
+    height: auto;
+    width: 100%;
+  }
+
+  .postPreview h1 {
+    font-size: 1.6em;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  #postsPreview {
+    width: 60%;
+    margin: 10em 0 0 0;
+  }
+
+  .postPreview .previewImage {
+    height: auto;
+    width: 100%;
+  }
+
+  .postPreview h1 {
+    font-size: 2.3em;
+  }
+} 
+
+@media (min-width: 1201px) {
+  #postsPreview {
+    width: 63%;
+    margin: 10em 0 0 0;
+  }
+
+  .postPreview .previewImage {
+    height: auto;
+    width: 100%;
+  }
+
+  .postPreview h1 {
+    font-size: 2.5em;
+  }
+}
+
+#postsPreview {
+  font-family: 'Scope One', serif;
+  float: right;
+}
+
+.postPreview {
+  padding: 0 0 40px 0;
+}
+
+.postPreview h1 {
+  color: #444444;
+  margin: 14px 0 0 0;
+  font-weight: 300;
+  line-height: 1.1em;
+}
+
+.postPreview .previewImage img {
+  max-height: 350px; 
+}
+
+.postPreview h2 {
+  color: #aaaaaa;
+  font-weight: 300;
+  font-size: 1.4em;
+  margin: 0 0 8px 0;
+}

@@ -1,0 +1,56 @@
+@media (max-width: 900px) {
+  #content {
+    font-size: 1.15em;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  #content {
+    font-size: 1.28em;
+  }
+} 
+
+@media (min-width: 1201px) {
+  #content {
+    font-size: 1.28em;
+  } 
+}
+
+#content {
+  font-family: 'Scope One', serif;
+  max-width: 740px;
+  width: 100%;
+}
+
+#content p {
+  padding-bottom: 10px;
+  line-height: 2em;
+  color: #333333;
+  margin: 0;
+}
+
+#content li {
+  line-height: 2em;
+  color: #333333;
+  margin: 0;
+}
+
+#content h1 {
+  margin: 55px 0 30px 0;
+  color: #000000;
+  font-weight: 500;
+  line-height: 0;
+}
+
+#content h2 {
+  margin: 35px 0 10px 0;
+  color: #333333;
+  font-weight: 500;
+  line-height: 0;
+}
+
+#content h3 {
+  margin: 0;
+  color: #333333;
+  font-weight: 500;
+}

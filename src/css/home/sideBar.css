@@ -1,0 +1,65 @@
+@media (max-width: 900px) {
+  #sideBar {
+    display: none; 
+    width: 0%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  #sideBar {
+    margin: 10em 8% 0 2%;
+    width: 25%;
+    min-width: 258px;
+  }
+
+  #sideBar h2 {
+    font-size: 1.3em;
+  }
+
+  #sideBar h3 {
+    color: #666666;
+    font-size: 1.1em;
+  }
+} 
+
+@media (min-width: 1201px) {
+  #sideBar {
+    margin: 10em 8% 0 2%;
+    width: 25%;
+  }
+
+  #sideBar h2 {
+    font-size: 1.5em;
+  }
+
+  #sideBar h3 {
+    color: #666666;
+    font-size: 1.3em;
+  }
+}
+
+#sideBar {
+  font-family: 'Raleway', sans-serif;
+  float: left;
+  border-top: 0.5px groove;
+  position: fixed;
+}
+
+#sideBar h2 {
+  color: #888888;
+  font-weight: 100;
+  margin: 20px 0 0 0;
+}
+
+#sideBar h3 {
+  color: #666666;
+  font-weight: 100;
+  margin-top: 8px;
+  line-height: 1.3em;
+}
+
+#sideBar .dropDown .detailsContainer {
+  padding-left: 12px;
+  margin-left: 15px;
+  border-left: 0.5px groove;
+}
