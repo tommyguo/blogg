@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Remarkable from 'remarkable';
 
 import '../../css/post/post.css';
 import '../../css/postContent.css';
 import PostHeader from '../components/PostHeader';
+import PostContent from '../components/PostContent';
 
 class Post extends React.Component {
   constructor(props) {
@@ -52,12 +52,6 @@ class Post extends React.Component {
       });
   }
 
-  getContent() {
-    const md = new Remarkable();
-
-    return { __html: md.render(this.state.content) };
-  }
-
   render() {
     if (this.state.isLoaded) {
       if (!this.state.error) {
@@ -70,7 +64,7 @@ class Post extends React.Component {
               banner={this.state.banner}
             />
 
-            <div id='content' dangerouslySetInnerHTML={this.getContent()}></div>
+            <PostContent content={this.state.content} />
           </div>
         );
       } else {

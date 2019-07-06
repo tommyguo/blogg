@@ -7,7 +7,7 @@ function getAboutDetails() {
     <div>
       <h3>
         Welcome to my blog! I&#39;ll be writing about tech, board games, and life.
-        I just graduated from NYU, and I&#39;ll be a full-stack engineer at Stripe starting July 2019.
+        I just graduated from NYU, and I&#39;ll be a software engineer at Stripe starting July 2019.
         Currently based in NYC.
       </h3>
     </div>

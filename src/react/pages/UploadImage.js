@@ -1,78 +1,20 @@
 import React from 'react';
 
 import '../../css/uploadImage/uploadImage.css';
-import { VALID_EMAILS } from '../../config/config';
+import GoogleSignIn from '../components/GoogleSignIn';
 
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
-    this.onSignIn = this.onSignIn.bind(this);
-    this.signOut = this.signOut.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
     this.state = {
-      signInError: false,
       googleIdToken: null,
-      email: null,
     };
   }
 
-  componentDidMount() {
-    window.gapi.signin2.render('g-signin2', {
-      'width': 250,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': this.onSignIn,
-    });
-  }
-
-  onSignIn(googleUser) {
+  handleSignIn(googleIdToken) {
     this.setState({
-      googleIdToken: googleUser.getAuthResponse().id_token,
-      email: googleUser.getBasicProfile().getEmail(),
-    });
-
-    if (VALID_EMAILS.includes(googleUser.getBasicProfile().getEmail())) {
-      this.setState({ signInError: false });
-    } else {
-      const auth2 = window.gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        this.setState({
-          googleIdToken: null,
-          signInError: true,
-        });
-
-        window.gapi.signin2.render('g-signin2', {
-          'width': 250,
-          'height': 50,
-          'longtitle': true,
-          'theme': 'dark',
-          'onsuccess': this.onSignIn
-        });
-      });
-    }
-  }
-
-  getSignInError() {
-    if (this.state.signInError) {
-      return <div className='error'>Invalid Email</div>;
-    }
-  }
-
-  signOut(e) {
-    e.preventDefault();
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
-      this.setState({
-        googleIdToken: null,
-      });
-
-      window.gapi.signin2.render('g-signin2', {
-        'width': 250,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': this.onSignIn
-      });
+      googleIdToken: googleIdToken
     });
   }
 
@@ -80,10 +22,9 @@ class UploadImage extends React.Component {
     if (this.state.googleIdToken) {
       return (
         <div id='uploadImagePage'>
-          <div className='logInBar'>
-            <a href='#' onClick={this.signOut}>Sign Out of {this.state.email}</a>
-            <div id='g-signin2'></div>
-          </div>
+          <GoogleSignIn handleSignIn={this.handleSignIn} googleIdToken={this.state.googleIdToken} />
+          <br></br>
+          <br></br>
 
           <form action='/api/image' encType='multipart/form-data' method='POST'>
             <label>
@@ -105,10 +46,7 @@ class UploadImage extends React.Component {
       );
     } else {
       return (
-        <div>
-          {this.getSignInError()}
-          <div id='g-signin2'></div>
-        </div>
+        <GoogleSignIn handleSignIn={this.handleSignIn} googleIdToken={this.state.googleIdToken} />
       );
     }
   }

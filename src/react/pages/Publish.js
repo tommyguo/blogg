@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Remarkable from 'remarkable';
 import { withRouter } from 'react-router-dom';
 
 import '../../css/publish/publish.css';
 import '../../css/postContent.css';
 import PostHeader from '../components/PostHeader';
-
-import { VALID_EMAILS } from '../../config/config';
+import PostContent from '../components/PostContent';
+import GoogleSignIn from '../components/GoogleSignIn';
 
 class Publish extends React.Component {
   constructor(props) {
     super(props);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handlePublish = this.handlePublish.bind(this);
-    this.onSignIn = this.onSignIn.bind(this);
-    this.signOut = this.signOut.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
     this.state = {
       slug: 'url-slug',
       title: 'Post Title', 
@@ -23,66 +21,13 @@ class Publish extends React.Component {
       banner: 'Banner Image URL',
       content: 'Post Content',
       publishingError: false,
-      signInError: false,
       googleIdToken: null,
-      email: null,
     };
   }
 
-  componentDidMount() {
-    window.gapi.signin2.render('g-signin2', {
-      'width': 250,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': this.onSignIn,
-    });
-  }
-
-  onSignIn(googleUser) {
+  handleSignIn(googleIdToken) {
     this.setState({
-      googleIdToken: googleUser.getAuthResponse().id_token,
-      email: googleUser.getBasicProfile().getEmail(),
-    });
-
-    if (VALID_EMAILS.includes(googleUser.getBasicProfile().getEmail())) {
-      const signInButton = document.getElementsByClassName('abcRioButton')[0];
-      this.setState({ signInError: false });
-      signInButton.classList.add('hidden');
-    } else {
-      const auth2 = window.gapi.auth2.getAuthInstance();
-      auth2.signOut().then(() => {
-        this.setState({
-          googleIdToken: null,
-          signInError: true,
-        });
-
-        window.gapi.signin2.render('g-signin2', {
-          'width': 250,
-          'height': 50,
-          'longtitle': true,
-          'theme': 'dark',
-          'onsuccess': this.onSignIn
-        });
-      });
-    }
-  }
-
-  signOut(e) {
-    e.preventDefault();
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
-      this.setState({
-        googleIdToken: null,
-      });
-
-      window.gapi.signin2.render('g-signin2', {
-        'width': 250,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': this.onSignIn
-      });
+      googleIdToken: googleIdToken
     });
   }
 
@@ -92,19 +37,9 @@ class Publish extends React.Component {
     this.setState({ [name]: value });
   }
 
-  getRedirect() {
-    return '/' + this.state.slug;
-  }
-
   getPublishingError() {
     if (this.state.publishingError) {
       return <div className='error'>There was an error publishing</div>;
-    }
-  }
-
-  getSignInError() {
-    if (this.state.signInError) {
-      return <div className='error'>Invalid Email</div>;
     }
   }
 
@@ -140,20 +75,11 @@ class Publish extends React.Component {
       });
   }
 
-  getOutput() {
-    const md = new Remarkable();
-
-    return { __html: md.render(this.state.content) };
-  }
-
   render() {
     if (this.state.googleIdToken) {
       return (
         <div id='publishPage'>
-          <div className='logInBar'>
-            <a href='#' onClick={this.signOut}>Sign Out of {this.state.email}</a>
-            <div id='g-signin2'></div>
-          </div>
+          <GoogleSignIn handleSignIn={this.handleSignIn} googleIdToken={this.state.googleIdToken} />
 
           <div id='publish'>
             <div id='input'>  
@@ -186,7 +112,7 @@ class Publish extends React.Component {
                 banner={this.state.banner}
               />
 
-              <div id='content' dangerouslySetInnerHTML={this.getOutput()}></div>
+              <PostContent content={this.state.content} />
             </div>
           </div>
         </div>
@@ -194,10 +120,7 @@ class Publish extends React.Component {
       );
     } else {
       return (
-        <div>
-          {this.getSignInError()}
-          <div id='g-signin2'></div>
-        </div>
+        <GoogleSignIn handleSignIn={this.handleSignIn} googleIdToken={this.state.googleIdToken} />
       );
     }
   }

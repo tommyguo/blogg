@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const jsonParser = require('body-parser').json();
@@ -5,14 +6,13 @@ const multer = require('multer');
 const { OAuth2Client } = require('google-auth-library');
 
 const models = require('../db/models/index.js')();
+const VALID_EMAILS = require('../config/config.js').VALID_EMAILS;
 
 const Post = models.Post;
 const Image = models.Image;
 
 const upload = multer();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-const VALID_EMAILS = ['tommyguo97@gmail.com'];
 
 async function verifyEmail(googleIdToken) {
   const ticket = await googleClient.verifyIdToken({

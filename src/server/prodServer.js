@@ -1,23 +1,23 @@
-require('dotenv');
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-const fs = require('fs');
-const https = require('https');
+// const fs = require('fs');
+// const https = require('https');
 const httpProxy = require('http-proxy');
 
 // set up ports
 const httpPort = 80;
-const httpsPort = 443;
+// const httpsPort = 443;
 
-// http -> https redirect
-app.use((req, res, next) => {
-  if (req.secure) {
-    next();
-  } else {
-    res.redirect('https://' + req.headers.host + req.url);
-  }
-});
+// uncomment to enable http -> https redirect
+// app.use((req, res, next) => {
+//   if (req.secure) {
+//     next();
+//   } else {
+//     res.redirect('https://' + req.headers.host + req.url);
+//   }
+// });
 
 const apiProxy = httpProxy.createProxyServer();
 
@@ -44,9 +44,10 @@ const httpServer = http.createServer(app);
 httpServer.listen(httpPort);
 console.log('prod server listening to port', httpPort);
 
-const privateKey = fs.readFileSync(process.env.PRIV_KEY_PATH, 'utf8');
-const certificate = fs.readFileSync(process.env.CERT_PATH, 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(httpsPort);
-console.log('prod server listening to port', httpsPort);
+// uncomment to allow HTTPS
+// const privateKey = fs.readFileSync(process.env.PRIV_KEY_PATH, 'utf8');
+// const certificate = fs.readFileSync(process.env.CERT_PATH, 'utf8');
+// const credentials = { key: privateKey, cert: certificate };
+// const httpsServer = https.createServer(credentials, app);
+// httpsServer.listen(httpsPort);
+// console.log('prod server listening to port', httpsPort);

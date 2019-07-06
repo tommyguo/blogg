@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -33,15 +35,6 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        // Loads the javacript into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins 
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            //options: { minimize: true }
-          }
-        ]
       },
       { 
         test: /\.css$/,
@@ -61,6 +54,8 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/html/index.html',
       filename: './index.html',
+      hash: true,
+      clientId: process.env.GOOGLE_CLIENT_ID,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

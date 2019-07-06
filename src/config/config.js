@@ -1,3 +1,3 @@
 module.exports = {
-  VALID_EMAILS: ['tommyguo97@gmail.com']
+  VALID_EMAILS: ['tguo1393@gmail.com']
 };
