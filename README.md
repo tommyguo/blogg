@@ -25,11 +25,11 @@ If you're stuck at any point, feel free to email me at `tguo1393@gmail.com`.
 
 ### Set up your cloud-hosted virtual machine (VM) instance:
 Your web server will run on this virtual machine. I'm using Google Cloud Platform for this tutorial. Sign up for $300 worth of GCP credit at [cloud.google.com/free/](https://cloud.google.com/free/). Go to [console.cloud.google.com](https://console.cloud.google.com) and log in. Click "Select a project" and then "New Project". Name it whatever you want.  
-![](src/image/new_project.png)
+![](src/images/new_project.png)
 On the left sidebar, select "Compute Engine", and then select "VM instances". On the instances page, click "Create Instance". Name your instance anything you wish, change Machine type to f1-micro (to save money since you can always increase resources later), and check "Allow HTTP traffic" and "Allow HTTPS traffic".
-![](src/image/vm_instance.png)
+![](src/images/vm_instance.png)
 Now that your VM instance has been created, select "VPC network" on the left sidebar, and then select "External IP addresses". Click "Reserve Static Address", give your IP address a name, and click "Reserve". Afterwards, click "Change" and under "Attach to", select the name of the VM instance you just created. Take note of the "External Address" of the IP address you reserved: that's now the IP address of your VM.
-![](src/image/reserve_address.png)
+![](src/images/reserve_address.png)
 
 ### Set up your cloud-hosted DB instance:
 Blogg stores posts in a database so that you don't have to manually edit code everytime you want to publish something to your blog. On the left sidebar, select "SQL", then "Create Instance", and then "PostgreSQL". Choose an Instance ID and a secure password. Now under your instance details, click "Add network" to authorize an IP address to access your DB instance. You'll want to add any IP address that you'll be developing from (office, home IP address) as well as the IP address of your VM from the previous section. Google "what's my IP address" to find your IP address.
@@ -64,7 +64,7 @@ Warning: the `.env` file should NEVER be shared publicly (e.g. pushed to Github)
 Blogg uses Google Sign-In to prevent unauthorized users from publishing posts to your blog.
 Follow the "Before you begin" part of this tutorial to grab your Client ID [developers.google.com/identity/sign-in/web/sign-in](https://developers.google.com/identity/sign-in/web/sign-in). Add `http:localhost:8080` and your domain name under "Authorized JavaScript origins":
 
-![](src/image/client_id.png)
+![](src/images/client_id.png)
 
 Add the following to your `.env` file with your client ID instead of the placeholder one:
 
@@ -82,7 +82,7 @@ Your dev environment is now ready!
 ### Open up your browser:
 Check out the main page at `http://localhost:8080`, which shows previews of your blog posts. Since you don't have any blog posts yet, you should only see the side bar. Check out the publishing page at `http://localhost:8080/publish`. You should see the following if Google Sign-In was set up correctly:
 
-![](src/image/publish.png)
+![](src/images/publish.png)
 
 ### Make the blog yours:
 Now that your dev environment is ready, you can go ahead and modify the blog. In `blogg/src/html/index.html`, change the title of the website. In `blogg/src/react/components`, add your personal details to `NameBar.js`, `SideBar.js`, and `AuthorTag.js`. Because the dev environment supports Hot Module Replacement, you should see these updates when you visit `http://localhost:8080` without rebuilding the web app or restarting the server. In `blogg/src/images`, replace `prof_pic.png` with a picture of yourself! Since this isn't a component, you will have to rebuild the web app and restart the server to see the changes. Simply terminate the script and rerun:
@@ -133,7 +133,7 @@ To stop a process, run:
 Congratulations! You've set up your own blog.
 
 # Start Publishing Posts
-Now you're ready to publish a post. Simply head over to `/publish`, log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `/posts/[url-slug]`. The `Post Content` field accepts Markdown. Here's a helpful cheat sheet for Markdown: `https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet`. After you publish a post, it will show up on the main page.
+Now you're ready to publish a post. Simply head over to `/publish`, log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `/post/[url-slug]`. The `Post Content` field accepts Markdown. Here's a helpful cheat sheet for Markdown: `https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet`. After you publish a post, it will show up on the main page.
 
 If you ever need to manually interact with the database, for example to edit or delete a post, I recommend [pgAdmin](https://www.pgadmin.org/download/). 
 
