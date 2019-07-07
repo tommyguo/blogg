@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     // the complete URL for your banner image (can be realtive)
     banner: DataTypes.STRING,
-    content: DataTypes.STRING(6000),
+    content: DataTypes.STRING(30000),
     // the URL slug to view the post (appended to /post)
     slug: {type: DataTypes.STRING, unique: true}
   });

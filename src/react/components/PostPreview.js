@@ -9,7 +9,6 @@ class PostPreview extends React.Component {
         <Link to={'/post/' + this.props.slug}>
           <div className='postPreview'>
             <h1>{this.props.title}</h1>
-            <h2>{this.props.description}</h2>
             {this.props.image}
           </div>
         </Link>
@@ -23,7 +22,6 @@ class PostPreview extends React.Component {
 PostPreview.propTypes = {
   slug: PropTypes.string,
   title: PropTypes.string,
-  description: PropTypes.string,
   image: PropTypes.element,
   content: PropTypes.element,
 };

@@ -45,8 +45,7 @@ class PostsPreview extends React.Component {
         <PostPreview 
           key={post.id}
           slug={post.slug}
-          title={post.title} 
-          description={post.description} 
+          title={post.title}
           image={<Image className='previewImage' 
           src={post.banner} />} 
         />

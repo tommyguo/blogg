@@ -1,5 +1,7 @@
 # Blogg
-Blogg is a simple open-source blogging platform designed for developers. You get to own the code, hosting, and domain name while skipping the hassle of config, boilerplate, and setup. Download the code and get a blog running from your own personal domain in less than an hour! To see what the blog looks like, head over to mine: [tommyguo.me](https://tommyguo.me).
+As a CS student and developer, building my own personal website/blog was important to me. It was an opportunity to learn web development, practice programming, and enjoy myself. However, there's a lot of tedious configuration and setup required to get a blog going. For budding developers, it's hard to know where to start, what technologies to use, and how to structure your project. For more experienced developers, getting React, Webpack, and your web server to play nice can be challenging.
+
+Blogg is a simple open-source blogging platform designed for developers of all skill levels. You get to own the code, hosting, and domain name while skipping the hassle of config, boilerplate, and setup. Download the code and get a blog running from your own personal domain in less than an hour! To see what the blog looks like, head over to mine: [tommyguo.me](https://tommyguo.me).
 
 Blogg provides just the basic blogging functionalities. Because you own the code, you can (and are encouraged to) modify and add new features to your blog. I think that Blogg can be helpful whether you want a simple website to jot down your thoughts or a professional blog that's filled with features.
 
@@ -26,7 +28,7 @@ And here are some things that you might learn by implementing Blogg:
 * cloud computing
 
 # Technologies
-Blogg is written in JavaScript on the front-end and back-end. It's a single page application that uses React on the front-end (and Webpack + Babel to prepare the React files). Front-end routing is handled with React Router while back-end routing for features such as HTTPS and API calls to the database are handled with Express. Blogg uses Sequelize as its ORM and PostgreSQL as its database. Blog posts are written in Markdown and converted to HTML using Remarkable. Authentication is done using Google Sign-In.
+Blogg is a single page application that uses React on the front-end (and Webpack + Babel to prepare the React files). Front-end routing is handled with React Router while back-end routing for features such as HTTPS and API calls to the database are handled with Express. Blogg uses Sequelize as its ORM and PostgreSQL as its database. Blog posts are written in Markdown and converted to HTML using Remarkable. Authentication is done using Google Sign-In.
 
 ![](src/files/diagram.svg)
 
@@ -107,15 +109,15 @@ Now it's time to get this running on your VM so that your blog will be accessibl
 
 ### Transfer files to your VM:
 
-You'll need to transfer all the code in `blogg` over to your VM. There are a couple of ways to do this. You could push your code to Github and then download the code on your VM. If you do this, remember to rerun `npm install` as well as transfer over your `.env` file, which won't be tracked by git. Other options are listed in [cloud.google.com/compute/docs/instances/transfer-files](https://cloud.google.com/compute/docs/instances/transfer-files).
+You'll need to transfer all the code in `blogg` over to your VM. There are a couple of ways to do this. You could push your code to Github and then download the code on your VM. If you do this, remember to rerun `npm install` as well as transfer over your `.env` file, which won't be tracked by git. Other options are listed in [cloud.google.com/compute/docs/instances/transfer-files](https://cloud.google.com/compute/docs/instances/transfer-files). Personally, using `scp` has worked great for me.
 
 ### Build the web app in prod mode:
-Once you've transferred all the code to your VM, head over to `blogg` on your VM and run:
+Once you've transferred all the code to your VM, head over to the `blogg` repo on your VM and run:
 
     npm run buildProd
 
 ### Run the web app:
-Now that it's finished building, you can run the server code:
+Once it's finished building, you can run the server code:
 
     sudo npm start
 
@@ -146,7 +148,7 @@ To stop a process, run:
 Congratulations! You've set up your own blog.
 
 # Start Publishing Posts
-Now you're ready to publish a post. Simply head over to `/publish`, log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `/post/[url-slug]`. The `Post Content` field accepts Markdown and converts it into HTML, which is previewed below. Here's a helpful cheat sheet for Markdown: [github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). After you publish a post, it will automatically show up on the main page.
+Now you're ready to publish a post. Simply head over to `http://localhost:8080/publish` (if you're running in dev mode on your computer) or `http://[VM_IP_ADDRESS]` (if you're running in prod mode on your VM), log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `http://[DOMAIN_NAME/IP_ADDRESS]/post/[url-slug]`. The `Post Content` field accepts Markdown and converts it into HTML, which is previewed below. Here's a helpful cheat sheet for Markdown: [github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). After you publish a post, it will automatically show up on the main page.
 
 If you ever need to manually interact with the database, for example to edit or delete a post, I recommend [pgAdmin](https://www.pgadmin.org/download/). 
 

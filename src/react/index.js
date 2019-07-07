@@ -12,11 +12,11 @@ import '../images/logo_github.png';
 import '../images/logo_linkedin.png';
 import '../images/logo_mail.png';
 import '../images/prof_pic.png';
-import '../images/client_id.png'
-import '../images/new_project.png'
-import '../images/publish.png'
-import '../images/reserve_address.png'
-import '../images/vm_instance.png'
+import '../images/client_id.png';
+import '../images/new_project.png';
+import '../images/publish.png';
+import '../images/reserve_address.png';
+import '../images/vm_instance.png';
 
 ReactDOM.render(
   <AppRouter/>,

@@ -10,7 +10,7 @@
   }
 
   .postPreview h1 {
-    font-size: 1.6em;
+    font-size: 1.7em;
   }
 }
 
@@ -26,7 +26,11 @@
   }
 
   .postPreview h1 {
-    font-size: 2.3em;
+    font-size: 1.7em;
+  }
+
+  .postPreview {
+    max-width: 500px;
   }
 } 
 
@@ -42,7 +46,11 @@
   }
 
   .postPreview h1 {
-    font-size: 2.5em;
+    font-size: 1.9em;
+  }
+
+  .postPreview {
+    max-width: 600px;
   }
 }
 
@@ -60,15 +68,5 @@
   margin: 14px 0 0 0;
   font-weight: 300;
   line-height: 1.1em;
-}
-
-.postPreview .previewImage img {
-  max-height: 350px; 
-}
-
-.postPreview h2 {
-  color: #aaaaaa;
-  font-weight: 300;
-  font-size: 1.4em;
-  margin: 0 0 8px 0;
+  padding-bottom: 10px;
 }
