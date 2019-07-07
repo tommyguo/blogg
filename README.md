@@ -12,15 +12,28 @@ Although Blogg is designed to be simple, here are things you should know or lear
 * basic familiarity with Express or similar web app framework: [www.npmjs.com/package/express](https://www.npmjs.com/package/express)
 * basic SQL
 
+And here are some things that you might learn by implementing Blogg:
+* how to structure a web app
+* good development practices
+* more advanced HTML, CSS, JavaScript, Node.js, and React
+* React Router
+* Webpack
+* SQL and Sequelize
+* environment variables
+* responsive web design
+* authentication
+* HTTPS
+* cloud computing
+
 # Technologies
-Blogg is written in JavaScript on the front-end and back-end. It's a single page application that uses React on the front-end (and Webpack + Babel to prepare the React files). Front-end routing is handled with React Router while back-end routing for features such as HTTPS and API calls to the database are handled with Express. Blogg uses Sequelize as its ORM and PostgreSQL as its database. Blog posts are written in Markdown and converted to HTML to be served later using Remarkable. Authentication is done using Google Sign-In.
+Blogg is written in JavaScript on the front-end and back-end. It's a single page application that uses React on the front-end (and Webpack + Babel to prepare the React files). Front-end routing is handled with React Router while back-end routing for features such as HTTPS and API calls to the database are handled with Express. Blogg uses Sequelize as its ORM and PostgreSQL as its database. Blog posts are written in Markdown and converted to HTML using Remarkable. Authentication is done using Google Sign-In.
 
 ![](src/files/diagram.svg)
 
 # Get Started
 If you're stuck at any point, feel free to email me at `tguo1393@gmail.com`.
 
-### Download the latest versions of `node` and `npm`:
+### Download the latest versions of node and npm:
 [nodejs.org/en/](https://nodejs.org/en/)
 
 ### Set up your cloud-hosted virtual machine (VM) instance:
@@ -28,11 +41,11 @@ Your web server will run on this virtual machine. I'm using Google Cloud Platfor
 ![](src/images/new_project.png)
 On the left sidebar, select "Compute Engine", and then select "VM instances". On the instances page, click "Create Instance". Name your instance anything you wish, change Machine type to f1-micro (to save money since you can always increase resources later), and check "Allow HTTP traffic" and "Allow HTTPS traffic".
 ![](src/images/vm_instance.png)
-Now that your VM instance has been created, select "VPC network" on the left sidebar, and then select "External IP addresses". Click "Reserve Static Address", give your IP address a name, and click "Reserve". Afterwards, click "Change" and under "Attach to", select the name of the VM instance you just created. Take note of the "External Address" of the IP address you reserved: that's now the IP address of your VM.
+Now that your VM instance has been created, select "VPC network" on the left sidebar, and then select "External IP addresses". Click "Reserve Static Address", give your IP address a name, and click "Reserve". Afterwards, click "Change", and select the name of the VM instance you just created. Take note of the "External Address" of the IP address you reserved: that's now the IP address of your VM.
 ![](src/images/reserve_address.png)
 
 ### Set up your cloud-hosted DB instance:
-Blogg stores posts in a database so that you don't have to manually edit code everytime you want to publish something to your blog. On the left sidebar, select "SQL", then "Create Instance", and then "PostgreSQL". Choose an Instance ID and a secure password. Now under your instance details, click "Add network" to authorize an IP address to access your DB instance. You'll want to add any IP address that you'll be developing from (office, home IP address) as well as the IP address of your VM from the previous section. Google "what's my IP address" to find your IP address.
+Blogg stores posts in a database so that you don't have to manually edit code everytime you want to publish something to your blog. On the left sidebar, select "SQL", then "Create Instance", and then "PostgreSQL". Choose an Instance ID and a secure password. Now under your instance details, click "Add network" to authorize an IP address to access your DB instance. You'll want to add any IP address that you'll be developing from (e.g. coffee shop or home IP address) as well as the IP address of your VM from the previous section. Google "what's my IP address" to find your IP address.
 
 # Set Up Your Dev Environment
 Follow these steps on the computer you use to code (so not the VM).
@@ -46,7 +59,7 @@ Follow these steps on the computer you use to code (so not the VM).
 ### Set up your .env file:
 Blogg uses [dotenv](https://www.npmjs.com/package/dotenv) to handle environment variables.
 These env variables tell the web app how to connect to the database, set up Google Sign-In, and find our SSL certificates.
-Create a file called `.env` under the root directory, `blogg`.
+Create a file called `.env` under the root directory, `blogg`:
 
     touch .env
 
@@ -62,7 +75,7 @@ Warning: the `.env` file should NEVER be shared publicly (e.g. pushed to Github)
 
 ### Set up Google Sign-In
 Blogg uses Google Sign-In to prevent unauthorized users from publishing posts to your blog.
-Follow the "Before you begin" part of this tutorial to grab your Client ID [developers.google.com/identity/sign-in/web/sign-in](https://developers.google.com/identity/sign-in/web/sign-in). Add `http:localhost:8080` and your domain name under "Authorized JavaScript origins":
+Follow the "Before you begin" part of this tutorial to grab your Client ID [developers.google.com/identity/sign-in/web/sign-in](https://developers.google.com/identity/sign-in/web/sign-in). Add `http:localhost:8080` and your domain name (if you don't have one now, you can always add it later) under "Authorized JavaScript origins":
 
 ![](src/images/client_id.png)
 
@@ -80,7 +93,7 @@ Finally in `blogg/src/config/config.js`, replace the following with Gmail accoun
 Your dev environment is now ready!
 
 ### Open up your browser:
-Check out the main page at `http://localhost:8080`, which shows previews of your blog posts. Since you don't have any blog posts yet, you should only see the side bar. Check out the publishing page at `http://localhost:8080/publish`. You should see the following if Google Sign-In was set up correctly:
+Check out the main page at `http://localhost:8080`, which shows previews of your blog posts. Since you don't have any blog posts yet, you should only see the side bar. Check out the publishing page at `http://localhost:8080/publish`. You should see the following after you sign in if Google Sign-In was set up correctly:
 
 ![](src/images/publish.png)
 
@@ -97,7 +110,7 @@ Now it's time to get this running on your VM so that your blog will be accessibl
 You'll need to transfer all the code in `blogg` over to your VM. There are a couple of ways to do this. You could push your code to Github and then download the code on your VM. If you do this, remember to rerun `npm install` as well as transfer over your `.env` file, which won't be tracked by git. Other options are listed in [cloud.google.com/compute/docs/instances/transfer-files](https://cloud.google.com/compute/docs/instances/transfer-files).
 
 ### Build the web app in prod mode:
-Once you've transferred all the code to your VM, head over to `blogg` and run:
+Once you've transferred all the code to your VM, head over to `blogg` on your VM and run:
 
     npm run buildProd
 
@@ -106,7 +119,7 @@ Now that it's finished building, you can run the server code:
 
     sudo npm start
 
-We need to use `sudo` in order to bind on port 80.
+We need to use `sudo` in order to bind to port 80.
 
 ### Open up your web browser:
 
@@ -114,7 +127,7 @@ Visit your website at `http://[VM_IP_Address]`. Once you get a domain name and l
 
 ### Make your web server run forever:
 
-[forever](https://www.npmjs.com/package/forever) ensures that your web server is always up. Terminate your current `sudo npm start` script. Then run:
+[forever](https://www.npmjs.com/package/forever) ensures that your web server is always up and running. Terminate your current `sudo npm start` script. Then run:
 
     sudo npm install forever -g
 
@@ -133,7 +146,7 @@ To stop a process, run:
 Congratulations! You've set up your own blog.
 
 # Start Publishing Posts
-Now you're ready to publish a post. Simply head over to `/publish`, log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `/post/[url-slug]`. The `Post Content` field accepts Markdown. Here's a helpful cheat sheet for Markdown: `https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet`. After you publish a post, it will show up on the main page.
+Now you're ready to publish a post. Simply head over to `/publish`, log in with the Gmail account that you have granted publishing access, and fill out the fields. The `url-slug` field is the URL you want to be able to access your post at: `/post/[url-slug]`. The `Post Content` field accepts Markdown and converts it into HTML, which is previewed below. Here's a helpful cheat sheet for Markdown: [github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). After you publish a post, it will automatically show up on the main page.
 
 If you ever need to manually interact with the database, for example to edit or delete a post, I recommend [pgAdmin](https://www.pgadmin.org/download/). 
 
@@ -143,7 +156,7 @@ You can follow this tutorial: [cloud.google.com/dns/docs/quickstart](https://clo
 If you're a student, check out how to get a domain name for free from Namecheap via Github: [education.github.com/pack](https://education.github.com/pack)
 
 ### Set up HTTPS:
-Follow this tutorial: [certbot.eff.org/lets-encrypt/debianstretch-other](https://certbot.eff.org/lets-encrypt/debianstretch-other), running all of this on your VM. Afterwards, uncomment HTTPS code in `blogg/src/server/prodServ.js` and add the following to your `.env` file (the path to your certs on your VM) with your values:
+Follow this tutorial: [certbot.eff.org/lets-encrypt/debianstretch-other](https://certbot.eff.org/lets-encrypt/debianstretch-other), running all of this on your VM. Afterwards, uncomment HTTPS code in `blogg/src/server/prodServ.js` and add the following to your `.env` file (the path to the certs on your VM) with your values:
 
     PRIV_KEY_PATH=/etc/letsencrypt/live/tommyguo.me/privkey.pem
     CERT_PATH=/etc/letsencrypt/live/tommyguo.me/cert.pem
